@@ -1,0 +1,3 @@
+#!/bin/sh
+choosen=$( man -k . | dmenu -l 20 | awk '{print $1}' )
+[ ! -z $choosen ] && man -Tpdf $choosen | zathura -

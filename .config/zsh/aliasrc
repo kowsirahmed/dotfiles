@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -vI" \
+	md="mkdir -pv" \
+	ffmpeg="ffmpeg -hide_banner"
+
+# Colorize commands when possible.
+alias \
+	ls="ls -hN --color=auto --group-directories-first" \
+  grep='grep --color=auto' \
+  egrep='egrep --color=auto' \
+  fgrep='fgrep --color=auto' \
+	diff="diff --color=auto" \
+	ccat="highlight --out-format=ansi" \
+  ll="ls -la" \
+  la="ls -d .* --color=auto"
+
+# These common commands are just too long! Abbreviate them.
+alias \
+	ka="killall" \
+	g="git" \
+	f="$FILE" \
+	e="$EDITOR" \
+	v="$EDITOR" \
+  sv="sudo nvim" \
+	z="zathura" \
+  pacfd="paru -Ss" \
+  pacin="paru -S" \
+  pacrem="paru -Rns"
+
+# moving to parent directories
+alias \
+  1='cd -' \
+  ..='cd ..' \
+  ...='cd ../../../' \
+  ....='cd ../../../../' \
+  .....='cd ../../../../' \
+  .4='cd ../../../../' \
+  .5='cd ../../../../..' \
+
+# git bare repo .
+alias config="git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
+alias myhome="echo $HOME"
