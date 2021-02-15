@@ -1,0 +1,5 @@
+#!/bin/sh
+grep "+" ~/.config/sxhkd/sxhkdrc -B 1 | sed '/^--$/d' | sed -n 'h;n;p;g;p' | sed 'N;s/\n/ /' > /tmp/hotkeys
+
+bspc rule -a Alacritty --one-shot state=floating rectangle=1206x678+80+45 && alacritty -e less /tmp/hotkeys
+#bspc rule -a Alacritty --one-shot state=floating rectangle=1206x678+80+45 && alacritty -e nvim /tmp/hotkeys +'set readonly'

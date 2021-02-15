@@ -1,0 +1,39 @@
+#!/bin/sh
+
+## This script Deletes existing database and deletes corresponding wordpress directoy in /srv/http folder.
+
+# Start mysqld service if not running.
+sudo -A systemctl status mysqld > /dev/null 2>&1;
+[ ! $? -eq 0 ] && sudo systemctl start mysqld && notify-send "starting mysqld service"; 
+
+# Get the username and password of mysql.
+user=$(dmenu -p "Welcome to MySQL. Enter your MySQL user Name." <&-)
+password=$(dmenu -P -p "Enter your password." <&-)
+
+# verify password.
+mysql --user=$user --password=$password -e "exit" > /dev/null 2>&1
+[ ! $? -eq 0 ] && notify-send -u critical "Wrong username or password. Verification failed." && exit 1;
+notify-send "Verification successfull"
+
+# Ask the user for the name of project to be remove.
+# If it is provided empty or doesn't exists ask again for the projectname.
+projectname () { 
+  project=$( dmenu -p "$1" <&- )
+  if ( [ -z "$project" ] || [ ! "$( sudo mysql -e "show databases;" | grep "^\\$project$" )" = "$project" ] ); then
+	projectname "Invalid Project name. Please try again."
+  fi
+}
+projectname "Enter the  project's name to be deleted."
+
+
+# Confirm the user what is gonna be deleted.
+[ "$( echo "No\nYes" | dmenu -r -p "This will delete $project DATABASE and delete /srv/http/$project directoy. Are you sure?" )" = "No" ] && exit 0;
+
+# Delete database and grant all privileges.
+sudo mysql -e "DROP DATABASE $project;"
+
+# Delete wordpress Directory in project directoy.
+sudo rm -rf /srv/http/$project;
+
+# Send notification to increase user experience.
+notify-send "Deleted database '$project' and Deleted project folder '/srv/http/$project'"

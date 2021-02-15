@@ -1202,9 +1202,6 @@
 📳 vibration mode; 1F4F3;
 📴 mobile phone off; 1F4F4;
 ♀️ female sign; 2640 FE0F;
-♂️ male sign; 2642 FE0F;
-⚧️ transgender symbol; 26A7 FE0F;
-✖️ multiply; 2716 FE0F;
 ➕ plus; 2795;
 ➖ minus; 2796;
 ➗ divide; 2797;
@@ -1424,7 +1421,6 @@
 🇬🇵 flag: Guadeloupe; 1F1EC 1F1F5;
 🇬🇶 flag: Equatorial Guinea; 1F1EC 1F1F6;
 🇬🇷 flag: Greece; 1F1EC 1F1F7;
-🇬🇸 flag: South Georgia & South Sandwich Islands; 1F1EC 1F1F8;
 🇬🇹 flag: Guatemala; 1F1EC 1F1F9;
 🇬🇺 flag: Guam; 1F1EC 1F1FA;
 🇬🇼 flag: Guinea-Bissau; 1F1EC 1F1FC;

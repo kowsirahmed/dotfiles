@@ -1,0 +1,9 @@
+source $XDG_CONFIG_HOME/nvim/myplugs.vim
+source $XDG_CONFIG_HOME/nvim/general/keybindings.vim
+source $XDG_CONFIG_HOME/nvim/general/options.vim
+source $XDG_CONFIG_HOME/nvim/plugconfig/coc/cocbasic.vim
+source $XDG_CONFIG_HOME/nvim/plugconfig/coc/explorer.vim
+source $XDG_CONFIG_HOME/nvim/plugconfig/lightline.vim
+"source $XDG_CONFIG_HOME/nvim/plugconfig/easymotion.vim
+source $XDG_CONFIG_HOME/nvim/plugconfig/fzf.vim
+luafile $XDG_CONFIG_HOME/nvim/plugconfig/colorizer.lua

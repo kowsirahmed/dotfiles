@@ -1,0 +1,2 @@
+#!/bin/sh
+colorpicker | awk '{printf $9}'  | xclip -selection clipboard

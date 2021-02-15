@@ -1,0 +1,43 @@
+#!/bin/sh
+
+## This script creates/updates new database in sql granting all privileges to selected user.
+
+# Start mysqld service if not running.
+sudo -A systemctl status mysqld > /dev/null 2>&1;
+[ ! $? -eq 0 ] && sudo systemctl start mysqld && notify "starting mysqld service";
+
+# Get the username and password of mysql.
+user=$(dmenu -p "Welcome to MySQL. Enter your MySQL user Name." <&-)
+password=$(dmenu -P -p "Enter your password." <&-)
+
+# verify password.
+mysql --user=$user --password=$password -e "exit" > /dev/null 2>&1
+[ ! $? -eq 0 ] && notify-send -u critical "Wrong username or password. Verification failed." && exit 1;
+notify-send "Verification successfull"
+
+# Ask the user for the name of project to be created. And check if it already exists or provided nothing.
+# If it is provided empty or already exists ask again for the projectname.
+projectname () { 
+  project=$( dmenu -p "$1" <&- )
+  if ( [ -z "$project" ] || [ "$( sudo mysql -e "show databases;" | grep "^\\$project$" )" = "$project" ] ); then
+	projectname "Invalid Project name. Please try again."
+  fi
+}
+projectname "Enter a new projectname."
+
+# Next process takes a bit time better to let the user know.
+notify-send "Creating project"
+
+# Create database and grant all privileges.
+sudo mysql -e "CREATE DATABASE $project; GRANT ALL PRIVILEGES ON $project.* TO $user@localhost; FLUSH PRIVILEGES"
+
+# Copy wordpress files in project directoy.
+sudo cp -r /srv/http/wordpress /srv/http/$project;
+# Fix wordpress config file.
+sudo sed -i "s/database_name_here/$project/g;s/username_here/$user/g;s/password_here/$password/g;" /srv/http/$project/wp-config.php
+# Change the file Ownership and Permission. Otherwise browser will fail to write.
+sudo chown -R http:http /srv/http/$project;
+sudo chmod 775 $(sudo find /srv/http/$project -type d); sudo chmod 664 $(sudo find /srv/http/$project -type f)
+
+# Send notification to increase user experience.
+notify-send "Created database '$project' and created project folder '/srv/http/$project'"
