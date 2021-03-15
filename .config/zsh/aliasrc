@@ -1,5 +1,3 @@
-#!/bin/sh
-
 # Verbosity and settings that you pretty much just always are going to want.
 alias \
 	cp="cp -iv" \
@@ -38,19 +36,17 @@ alias \
 	1='cd -' \
 	..='cd ..' \
 	...='cd ../../../' \
-	.4='cd ../../../../' \
-	.5='cd ../../../../../' \
-
-# git bare repo .
-alias config="git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
 # Change directory
 alias \
   gc="cd ~/.config/" \
   gb="cd ~/.local/bin" \
   gk="cd ~/.local/share/kawsar/" \
-  gp="cd ~/.local/share/kawsar/plugin" \
-  gt="cd ~/.local/share/kawsar/themes" \
+  gwp="cd ~/.local/share/kawsar/plugin" \
+  gwt="cd ~/.local/share/kawsar/themes" \
+  ggc="cd ~/.cache/dotfiles/.config" \
+  gglb="cd ~/.cache/dotfiles/.local/bin" \
+  gglk="cd ~/.cache/dotfiles/.local/share/kawsar" \
 
 # Random
   alias wget="wget --hsts-file $XDG_CONFIG_HOME/wget/wget-hsts"
