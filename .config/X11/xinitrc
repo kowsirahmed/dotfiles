@@ -1,0 +1,12 @@
+#!/bin/sh
+
+feh --no-fehbg --bg-fill ~/.config/wall.png
+pgrep -x sxhkd > /dev/null || sxhkd &
+setxkbmap -option "caps:swapescape"
+picom -f &
+xsetroot -cursor_name arrow
+xset r rate 300 50
+dunst &
+unclutter &
+
+exec bspwm
