@@ -1,10 +1,10 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""VIM PLUG"""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if empty(glob('/home/ka/.local/share/nvim/site/autoload/plug.vim'))
-  silent !sh -c 'curl -fLo /home/ka/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+if empty(glob('/home/kawsar/.local/share/nvim/site/autoload/plug.vim'))
+  silent !sh -c 'curl -fLo /home/kawsar/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 endif
-call plug#begin('/home/ka/.local/share/nvim/autoload/plugged')
+call plug#begin('/home/kawsar/.local/share/nvim/autoload/plugged')
 	Plug 'arcticicestudio/nord-vim'
 	Plug 'itchyny/lightline.vim'
 	Plug 'norcalli/nvim-colorizer.lua'
@@ -15,7 +15,7 @@ call plug#end()
 " Setting leader key
 let g:mapleader = " "
 " Edit Keybindings at any time while inside vim
-nnoremap <leader>ev :vsplit $XDG_CONFIG_HOME/nvim/general/keybindings.vim<cr>
+nnoremap <leader>ev :vsplit $XDG_CONFIG_HOME/nvim/init.vim<cr>
 " Sourcing vimrc
 noremap <leader>rv :source $MYVIMRC<cr>
 " Uppercasing a whole word
@@ -33,6 +33,8 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+" Enable or disable line wrap
+nnoremap <F1> :set wrap!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""AUTOCOMMANDS"""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -41,8 +43,9 @@ autocmd FileType html nnoremap  <leader>c viw<esc>a<space>class=""<esc>i
 autocmd FileType html inoremap  <leader>c <esc>viw<esc>a<space>class=""<esc>i
 autocmd FileType html nnoremap  <leader>a t>la
 autocmd FileType html inoremap  <leader>a <esc>t>la
-" vim commenting
+" commenting
 autocmd FileType vim nnoremap <buffer> gc I"<esc>
+autocmd FileType dosini nnoremap <buffer> gc I;<esc>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""GENERAL OPTIONS""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -111,7 +114,6 @@ set nobackup              " Some servers have issues with backup files, see #649
 set nowritebackup         " Some servers have issues with backup files, see #649.
 set updatetime=300        " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
 set shortmess+=c          " Don't pass messages to |ins-completion-menu|.
-" Nerd commenter recommended
 filetype plugin on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""PLUG CONFIGUARATION""""""""""""""""""""""""""""""""""
