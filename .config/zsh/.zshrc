@@ -1,5 +1,10 @@
-# #Enable Colors
+#!/bin/zsh
 
+# export language variables
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# #Enable Colors
 autoload -U colors && colors	# Load colors
 setopt autocd		# Automatically cd into typed directory.
 stty stop undef		# Disable ctrl-s to freeze terminal.
@@ -8,7 +13,7 @@ setopt interactive_comments
 # History in cache directory:
 HISTSIZE=10000000
 SAVEHIST=10000000
-HISTFILE=~/.cache/zsh/history
+HISTFILE=$XDG_CACHE_HOME/zsh/history
 HISTDUP=erase
 setopt appendhistory
 setopt sharehistory
@@ -54,16 +59,11 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-# Each terminal number
-printf '[3;7;40m%-6s[m\n' "$(sed -n $(($RANDOM%16+1))p ~/.local/share/kawsar/quotes)"
-
-# Load Starship
-[ $(pidof Xorg) ] && eval "$(starship init zsh)"
-
 # Load aliases and shortcuts if existent.
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/aliasrc"
 
+# Load Starship Load shell color script
+[ $(pidof Xorg) ] && eval "$( starship init zsh )" && colorscript -r
 
 # Load syntax highlighting; should be last.
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
-

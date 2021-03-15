@@ -10,14 +10,14 @@ alias \
 
 # Colorize commands when possible.
 alias \
-	ls="ls -hN --color=auto --group-directories-first" \
+	ls="ls -hX --color=auto --group-directories-first" \
 	grep='grep --color=auto' \
 	egrep='egrep --color=auto' \
 	fgrep='fgrep --color=auto' \
 	diff="diff --color=auto" \
 	ccat="highlight --out-format=ansi" \
-	ll="ls -la" \
-	la="ls -d .* --color=auto"
+	ll="ls -lA" \
+	lh="ls -ldA .*"
 
 # These common commands are just too long! Abbreviate them.
 alias \
@@ -30,18 +30,27 @@ alias \
 	z="zathura" \
 	pacfd="paru -Ss" \
 	pacin="paru -S" \
-	pacrem="paru -Rns"
+	pacrem="paru -Rns" \
+	plz="sudo -i su" \
 
 # moving to parent directories
 alias \
 	1='cd -' \
 	..='cd ..' \
 	...='cd ../../../' \
-	....='cd ../../../../' \
-	.....='cd ../../../../' \
 	.4='cd ../../../../' \
-	.5='cd ../../../../..' \
+	.5='cd ../../../../../' \
 
 # git bare repo .
 alias config="git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
-alias "sudo notify-send"="notify-send"
+
+# Change directory
+alias \
+  gc="cd ~/.config/" \
+  gb="cd ~/.local/bin" \
+  gk="cd ~/.local/share/kawsar/" \
+  gp="cd ~/.local/share/kawsar/plugin" \
+  gt="cd ~/.local/share/kawsar/themes" \
+
+# Random
+  alias wget="wget --hsts-file $XDG_CONFIG_HOME/wget/wget-hsts"
